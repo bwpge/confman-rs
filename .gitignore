@@ -1,0 +1,4 @@
+/target
+
+# remove once binary is more fleshed out
+Cargo.lock
