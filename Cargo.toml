@@ -1,0 +1,23 @@
+[package]
+name = "confman"
+version = "0.1.0"
+edition = "2021"
+description = "A cross-platform, modular configuration manager"
+authors = ["bwpge <bwpge.dev@gmail.com>"]
+license = "MIT"
+publish = false
+build = "build.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+vergen = { version = "8.3.1", features = ["build", "git", "git2"] }
+
+[dependencies]
+anyhow = "1.0.79"
+clap = { version = "4.4.18", features = [
+  "cargo",
+  "derive",
+  "env",
+  "wrap_help",
+] }
