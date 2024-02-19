@@ -4,7 +4,6 @@ use vergen::EmitBuilder;
 
 fn main() -> Result<(), Box<dyn Error>> {
     EmitBuilder::builder()
-        .build_date()
         .cargo_target_triple()
         .cargo_debug()
         .cargo_opt_level()
@@ -22,7 +21,7 @@ fn commit_info() {
         return;
     }
     let output = match Command::new("git")
-        .args(["log", "-1", "--date=short", "--format=%H %h"])
+        .args(["log", "-1", "--format=%H %h"])
         .output()
     {
         Ok(output) if output.status.success() => output,
@@ -32,7 +31,7 @@ fn commit_info() {
     let stdout = String::from_utf8(output.stdout).unwrap();
     for (val, var) in stdout
         .split_whitespace()
-        .zip(["CONFMAN_GIT_SHA", "CONFMAN_GIT_SHA_SHORT"])
+        .zip(["CARGO_PKG_GIT_SHA", "CARGO_PKG_GIT_SHA_SHORT"])
     {
         println!("cargo:rustc-env={var}={val}");
     }

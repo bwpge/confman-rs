@@ -1,4 +1,5 @@
 mod cli;
+mod commands;
 
 use std::process::ExitCode;
 
@@ -8,13 +9,14 @@ use crate::cli::Cli;
 
 fn main() -> ExitCode {
     let args = Cli::parse();
+    dbg!(&args);
 
-    if args.version {
-        let version = Cli::get_version_string(args.verbose > 0);
-        println!("{version}");
-        return ExitCode::SUCCESS;
+    match crate::commands::exec(&args) {
+        Ok(_) => ExitCode::SUCCESS,
+        Err(e) => {
+            // TODO: pretty print error
+            eprintln!("error: {e}");
+            ExitCode::FAILURE
+        }
     }
-
-    dbg!(args);
-    ExitCode::SUCCESS
 }
