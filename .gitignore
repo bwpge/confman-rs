@@ -2,3 +2,6 @@
 
 # remove once binary is more fleshed out
 Cargo.lock
+
+# local testing
+/*confman*.yaml
